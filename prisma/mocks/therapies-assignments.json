@@ -1,0 +1,43 @@
+[
+    {
+        "therapyId": 1,
+        "patientId": 4,
+        "applicatorId": 2,
+        "tutorId": 3,
+        "ownerId": 1,
+        "therapyDate": "2025-05-10",
+        "startHour": 9,
+        "endHour": 10
+    },
+    {
+        "therapyId": 2,
+        "patientId": 4,
+        "applicatorId": 2,
+        "tutorId": 3,
+        "ownerId": 1,
+        "therapyDate": "2025-05-11",
+        "startHour": 14,
+        "endHour": 15
+    },
+    {
+        "therapyId": 3,
+        "patientId": 4,
+        "applicatorId": 5,
+        "tutorId": 3,
+        "ownerId": 1,
+        "therapyDate": "2025-05-11",
+        "startHour": 14,
+        "endHour": 15
+    }
+    ,
+    {
+        "therapyId": 3,
+        "patientId": 4,
+        "applicatorId": 5,
+        "tutorId": 3,
+        "ownerId": 1,
+        "therapyDate": "2025-05-11",
+        "startHour": 14,
+        "endHour": 15
+    }
+]

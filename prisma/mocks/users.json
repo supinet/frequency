@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "Admin User",
+        "email": "admin@example.com",
+        "type": "ADMIN",
+        "birthDay": "1980-01-01",
+        "logo": "admin-logo.png",
+        "address": "123 Admin St"
+    },
+    {
+        "id": 2,
+        "name": "Keewe Prestes",
+        "email": "alice@applicators.com",
+        "type": "APPLICATOR",
+        "birthDay": "1985-05-10",
+        "logo": "alice-logo.png",
+        "address": "456 Applicator Rd"
+    },
+    {
+        "id": 3,
+        "name": "Carol JJernandes",
+        "email": "bob@tutors.com",
+        "type": "TUTOR",
+        "birthDay": "1987-07-12",
+        "logo": "bob-logo.png",
+        "address": "789 Tutor Ave"
+    },
+    {
+        "id": 4,
+        "name": "Charlie Alexander",
+        "email": "charlie@patients.com",
+        "type": "PATIENT",
+        "birthDay": "2010-03-15",
+        "logo": "charlie-logo.png",
+        "address": "321 Patient Blvd"
+    },
+    {
+        "id": 5,
+        "name": "Lais Bomas",
+        "email": "charlie@patients.com",
+        "type": "APPLICATOR",
+        "birthDay": "2010-03-15",
+        "logo": "charlie-logo.png",
+        "address": "321 Patient Blvd"
+    }
+]
