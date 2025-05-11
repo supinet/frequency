@@ -11,6 +11,10 @@ export async function generateUniqueName(
   field: string = 'name',
   additionalWhere: Record<string, any> = {},
 ): Promise<string> {
+  // console.log('baseName: ', baseName);
+  // console.log('model: ', {...model});
+  // console.log('field: ', field);
+  // console.log('additionalWhere: ', { ...additionalWhere });
   const existingItems = await model.findMany({
     where: {
       ...additionalWhere,

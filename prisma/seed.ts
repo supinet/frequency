@@ -1,4 +1,4 @@
-import { PrismaClient, USER_TYPE } from '@prisma/client';
+import { PrismaClient, THERAPY_STATUS, USER_TYPE } from '@prisma/client';
 import * as users from './mocks/users.json';
 import * as therapies from './mocks/therapies.json';
 import * as userTherapies from './mocks/therapies-assignments.json';
@@ -42,6 +42,8 @@ async function main() {
       create: {
         name: therapy.title,
         description: therapy.description,
+        status: THERAPY_STATUS.DRAFT,
+        year: new Date().getFullYear(),
       },
     });
     therapyMap[therapy.id] = upserted;

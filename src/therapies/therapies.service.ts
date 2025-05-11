@@ -3,12 +3,13 @@ import { TherapyDto } from './dto/therapy.dto';
 import { UpdateTherapyDto } from './dto/update-therapy.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { generateUniqueName } from 'src/utils/generate-name-utils';
+import { THERAPY_STATUS } from '@prisma/client';
 
 @Injectable()
 export class TherapiesService {
   constructor(private readonly prisma: PrismaService) {}
   async create(dto: Partial<TherapyDto>) {
-    const { id, name, ...data } = dto;
+    const { id, name, status, year, ...data } = dto;
     let baseName = name?.trim() ?? 'New name';
     const finalName = await generateUniqueName(
       baseName,
@@ -16,6 +17,7 @@ export class TherapiesService {
       'name',
       {
         deleted: false,
+        year: year ?? new Date().getFullYear(),
       },
     );
 
@@ -27,6 +29,8 @@ export class TherapiesService {
       create: {
         ...data,
         name: finalName,
+        status: status ?? THERAPY_STATUS.DRAFT,
+        year: year ?? new Date().getFullYear(),
       },
     });
     return therapy;

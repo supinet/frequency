@@ -1,4 +1,7 @@
 -- CreateEnum
+CREATE TYPE "THERAPY_STATUS" AS ENUM ('DRAFT', 'WIP', 'COMPLETED', 'RELEASED');
+
+-- CreateEnum
 CREATE TYPE "USER_TYPE" AS ENUM ('PHYSICAL_PERSON', 'COMPANY', 'PATIENT', 'TUTOR', 'APPLICATOR', 'ADMIN');
 
 -- CreateTable
@@ -23,6 +26,8 @@ CREATE TABLE "Therapy" (
     "id" SERIAL NOT NULL,
     "name" TEXT,
     "description" TEXT,
+    "status" "THERAPY_STATUS" NOT NULL,
+    "year" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deleted" BOOLEAN NOT NULL DEFAULT false,

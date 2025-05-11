@@ -36,10 +36,18 @@ model Therapy {
   id             Int      @id @default(autoincrement())
   name           String?
   description    String?
+  status         THERAPY_STATUS
+  year           Int
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   deleted        Boolean  @default(false)
   UserTherapy    UserTherapy[] @relation("TherapyRelation")
+}
+enum THERAPY_STATUS {
+  DRAFT
+  WIP
+  COMPLETED
+  RELEASED
 }
 
 model UserTherapy {
