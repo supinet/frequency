@@ -80,15 +80,9 @@ async function main() {
     const endDate = new Date(therapyDate);
     endDate.setHours(assignment.endHour, 0, 0, 0);
 
-    await prisma.userTherapy.upsert({
+    await prisma.therapyAttendance.upsert({
       where: {
-        patientId_applicatorId_tutorId_therapyId_therapyDate: {
-          patientId: assignment.patientId,
-          applicatorId: assignment.applicatorId,
-          tutorId: assignment.tutorId,
-          therapyId: assignment.therapyId,
-          therapyDate,
-        },
+        id: assignment.id,
       },
       update: {},
       create: {

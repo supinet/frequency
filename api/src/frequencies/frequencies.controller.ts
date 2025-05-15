@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { FrequenciesService } from './frequencies.service';
-import { CreateFrequencyDto } from './dto/create-frequency.dto';
+import { FrequencyDto } from './dto/create-frequency.dto';
 import { UpdateFrequencyDto } from './dto/update-frequency.dto';
 
 @Controller('frequencies')
@@ -18,7 +18,7 @@ export class FrequenciesController {
   constructor(private readonly frequenciesService: FrequenciesService) {}
 
   @Post()
-  create(@Body() createFrequencyDto: CreateFrequencyDto) {
+  create(@Body() createFrequencyDto: FrequencyDto) {
     return this.frequenciesService.create(createFrequencyDto);
   }
 

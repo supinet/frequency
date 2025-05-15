@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["typedSql"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                          Int                 @id @default(autoincrement())
+  name                        String
+  email                       String
+  type                        USER_TYPE
+  birthDay                    DateTime?
+  signatureImage              String?
+  logo                        String?
+  address                     String?
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  deleted                     Boolean             @default(false)
+  TherapyAttendancePatient    TherapyAttendance[] @relation("PatientRelation")
+  TherapyAttendanceApplicator TherapyAttendance[] @relation("ApplicatorRelation")
+  TherapyAttendanceTutor      TherapyAttendance[] @relation("TutorRelation")
+  UserOwner                   TherapyAttendance[] @relation("OwnerRelation")
+}
+
+model Therapy {
+  id                Int                 @id @default(autoincrement())
+  name              String?
+  description       String?
+  status            THERAPY_STATUS
+  year              Int
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deleted           Boolean             @default(false)
+  TherapyAttendance TherapyAttendance[] @relation("TherapyRelation")
+}
+
+enum THERAPY_STATUS {
+  DRAFT
+  WIP
+  COMPLETED
+  RELEASED
+}
+
+model TherapyAttendance {
+  id           Int @id @default(autoincrement())
+  therapyId    Int
+  patientId    Int
+  applicatorId Int
+  tutorId      Int
+  ownerId      Int
+
+  therapy    Therapy @relation("TherapyRelation", fields: [therapyId], references: [id])
+  patient    User    @relation("PatientRelation", fields: [patientId], references: [id])
+  applicator User    @relation("ApplicatorRelation", fields: [applicatorId], references: [id])
+  tutor      User    @relation("TutorRelation", fields: [tutorId], references: [id])
+  owner      User    @relation("OwnerRelation", fields: [ownerId], references: [id])
+
+  therapyDate DateTime
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deleted     Boolean  @default(false)
+
+  @@map("UserTherapyAttendance")
+}
+
+enum USER_TYPE {
+  PHYSICAL_PERSON
+  COMPANY
+  PATIENT
+  TUTOR
+  APPLICATOR
+  ADMIN
+}

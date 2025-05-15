@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFrequencyDto } from './dto/create-frequency.dto';
+import { FrequencyDto } from './dto/create-frequency.dto';
 import { UpdateFrequencyDto } from './dto/update-frequency.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { getAllTherapies } from '@prisma/client/sql';
@@ -9,7 +9,7 @@ import * as puppeteer from 'puppeteer';
 export class FrequenciesService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createFrequencyDto: CreateFrequencyDto) {
+  create(createFrequencyDto: FrequencyDto) {
     return 'This action adds a new frequency';
   }
 
@@ -18,7 +18,7 @@ export class FrequenciesService {
   }
 
   async getFrequencyPatientPdf(id: number): Promise<Buffer> {
-    const userTherapy = await this.prisma.userTherapy.findUnique({
+    const userTherapy = await this.prisma.therapyAttendance.findUnique({
       where: { id: id },
       include: { therapy: true, patient: true, tutor: true },
     });

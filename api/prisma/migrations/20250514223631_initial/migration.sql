@@ -36,7 +36,7 @@ CREATE TABLE "Therapy" (
 );
 
 -- CreateTable
-CREATE TABLE "UserTherapy" (
+CREATE TABLE "UserTherapyAttendance" (
     "id" SERIAL NOT NULL,
     "therapyId" INTEGER NOT NULL,
     "patientId" INTEGER NOT NULL,
@@ -50,23 +50,20 @@ CREATE TABLE "UserTherapy" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deleted" BOOLEAN NOT NULL DEFAULT false,
 
-    CONSTRAINT "UserTherapy_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "UserTherapyAttendance_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "UserTherapy_patientId_applicatorId_tutorId_therapyId_therap_key" ON "UserTherapy"("patientId", "applicatorId", "tutorId", "therapyId", "therapyDate");
+-- AddForeignKey
+ALTER TABLE "UserTherapyAttendance" ADD CONSTRAINT "UserTherapyAttendance_therapyId_fkey" FOREIGN KEY ("therapyId") REFERENCES "Therapy"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserTherapy" ADD CONSTRAINT "UserTherapy_therapyId_fkey" FOREIGN KEY ("therapyId") REFERENCES "Therapy"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserTherapyAttendance" ADD CONSTRAINT "UserTherapyAttendance_patientId_fkey" FOREIGN KEY ("patientId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserTherapy" ADD CONSTRAINT "UserTherapy_patientId_fkey" FOREIGN KEY ("patientId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserTherapyAttendance" ADD CONSTRAINT "UserTherapyAttendance_applicatorId_fkey" FOREIGN KEY ("applicatorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserTherapy" ADD CONSTRAINT "UserTherapy_applicatorId_fkey" FOREIGN KEY ("applicatorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserTherapyAttendance" ADD CONSTRAINT "UserTherapyAttendance_tutorId_fkey" FOREIGN KEY ("tutorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UserTherapy" ADD CONSTRAINT "UserTherapy_tutorId_fkey" FOREIGN KEY ("tutorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "UserTherapy" ADD CONSTRAINT "UserTherapy_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UserTherapyAttendance" ADD CONSTRAINT "UserTherapyAttendance_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
